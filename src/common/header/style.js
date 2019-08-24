@@ -125,3 +125,43 @@ color:white;
 }
 }
 `;
+
+export const SearchInfo = styled.div`
+position:absolute;
+left:0;
+width:240px;
+padding:0 20px;
+top:56px;
+box-shadow:0 0 8px rgba(0,0,0,.2);
+`;
+
+export const SearchInfoTitle = styled.div`
+margin-top:15px;
+margin_bottom:15px;
+line-height:20px;
+font-size:15px;
+color:#969696;
+`;
+
+export const SearchInfoSwitch = styled.span`
+float:right;
+font-size:13px;
+`;
+
+export const SearchInfoItem = styled.a`
+font-size:12px;
+padding:0 5px;
+line-height:20px;
+border:1px solid #ddd;
+color:#969696;
+border-radius:3px;
+display:block;
+float:left;
+margin-right:10px;
+margin-bottom:15px;
+color:#333;
+`;
+
+export const SearchInfoList = styled.div`
+overflow.hidden;
+`;
