@@ -21,21 +21,40 @@ import {
 class Header extends Component {
 
     getListArea() {
-        if (this.props.focused) {
+        const {focused, list, page, handleMouseIn, handleMouseLeave, mouseIn, handleChangePage, totalPage} = this.props;
+        const newList = list.toJS();
+        const pageList = [];
+        if (newList.length) {
+            for (let i = (page - 1) * 10; i < page * 10; i++) {
+                pageList.push(
+                    <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+                );
+            }
+        }
+        if (focused || mouseIn) {
             return (
-                <SearchInfo>
+                <SearchInfo
+                    onMouseEnter={handleMouseIn}
+                    onMouseLeave={handleMouseLeave}
+                >
                     <SearchInfoTitle>
                         HOT
-                        <SearchInfoSwitch>
+                        <SearchInfoSwitch
+                            onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
+                        >
+                            <span
+                                ref={(icon) => {
+                                    this.spinIcon = icon
+                                }}
+                                className="iconfont spin"
+                            >
+                                &#xe851;
+                            </span>
                             other topics?
                         </SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
-                        {
-                            this.props.list.map((item) => {
-                                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
-                            })
-                        }
+                        {pageList}
                     </SearchInfoList>
                 </SearchInfo>
             );
@@ -45,6 +64,7 @@ class Header extends Component {
     }
 
     render() {
+        const {focused, handleInputFocus, handleInputBlur, list} = this.props;
         return (<HeaderWrapper>
             <Logo/>
             <Nav>
@@ -55,17 +75,17 @@ class Header extends Component {
                 <SearchWrapper>
                     <CSSTransition
                         timeout={200}
-                        in={this.props.focused}
+                        in={focused}
                         classNames="slide"
                     >
                         <NavSearch
-                            className={this.props.focused ? 'focused' : ''}
-                            onFocus={this.props.handleInputFocus}
-                            onBlur={this.props.handleInputBlur}
+                            className={focused ? 'focused' : ''}
+                            onFocus={() => handleInputFocus(list)}
+                            onBlur={handleInputBlur}
                         ></NavSearch>
                     </CSSTransition>
                     <span
-                        className={this.props.focused ? 'focused iconfont' : 'iconfont'}
+                        className={focused ? 'focused iconfont zoom' : 'iconfont zoom'}
                     >
                             &#xe62b;
 
@@ -86,18 +106,41 @@ class Header extends Component {
 const mapStateToProps = (state) => {
     return {
         focused: state.getIn(['header', 'focused']),
-        list: state.getIn(['header', 'list'])
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        totalPage: state.getIn(['header', 'totalPage']),
+        mouseIn: state.getIn(['header', 'mouseIn'])
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleInputFocus() {
-            dispatch(actionCreators.getList());
+        handleInputFocus(list) {
+            (list.size === 0) && dispatch(actionCreators.getList());
             dispatch(actionCreators.searchFocus());
         },
         handleInputBlur() {
             dispatch(actionCreators.searchBlur());
+        },
+        handleMouseIn() {
+            dispatch(actionCreators.mouseEnter());
+        },
+        handleMouseLeave() {
+            dispatch(actionCreators.mouseLeave());
+        },
+        handleChangePage(page, totalPage, spin) {
+            let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
+            if (originAngle) {
+                originAngle = parseInt(originAngle, 10);
+            } else {
+                originAngle = 0;
+            }
+            spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
+            if (page < totalPage) {
+                dispatch(actionCreators.changePage(page + 1));
+            } else {
+                dispatch(actionCreators.changePage(1));
+            }
         }
     }
 }
