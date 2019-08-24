@@ -12,7 +12,7 @@ class Home extends Component {
                 <HomeLeft>
                     <img
                         className='banner-img'
-                        src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566637464168&di=38f46390a9dc5dd134c744b4458b5ac1&imgtype=jpg&src=http%3A%2F%2Fjinshiliuxue.net%2Fuploads%2Fimage%2F20170215%2F1487134638.jpg'
+                        src='https://images.chinatimes.com/newsphoto/2019-08-22/900/20190822003681.jpg'
                         alt='Northeastern University'/>
                     <Topic></Topic>
                     <List></List>
