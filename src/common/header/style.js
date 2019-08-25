@@ -7,10 +7,7 @@ height:58px;
 border-bottom:1px solid #f0f0f0
 `;
 
-export const Logo = styled.a.attrs(
-    {href: '/'}
-)
-    `
+export const Logo = styled.div`
 position:absolute;
 top:0;
 left:0;
@@ -34,6 +31,7 @@ line-height:56px;
 padding:0 15px;
 font-size:17px;
 color:#333;
+cursor:pointer;
 &.left{
 float:left;
 }
@@ -99,6 +97,7 @@ border-radius:19px;
 border:1px solid #ec6149;
 padding:0 20px;
 font-size:14px;
+cursor:pointer;
 &.reg{
 color;#ec6149;
 }
