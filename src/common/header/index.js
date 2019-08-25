@@ -104,9 +104,11 @@ class Header extends Component {
                 </SearchWrapper>
             </Nav>
             <Adition>
-                <Button className='write'>
-                    Write your post
-                </Button>
+                <Link to='/write'>
+                    <Button className='write'>
+                        Write your post
+                    </Button>
+                </Link>
                 <Button className='reg'>Sign in</Button>
             </Adition>
         </HeaderWrapper>);
