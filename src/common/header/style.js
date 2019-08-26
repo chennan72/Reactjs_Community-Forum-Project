@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import logo from '../../statics/logo.png';
 
 export const HeaderWrapper = styled.div`
+z-index:1;
 position:relative;
 height:58px;
 border-bottom:1px solid #f0f0f0
 `;
 
-export const Logo = styled.a.attrs(
-    {href: '/'}
-)
-    `
+export const Logo = styled.div`
 position:absolute;
 top:0;
 left:0;
@@ -34,6 +32,7 @@ line-height:56px;
 padding:0 15px;
 font-size:17px;
 color:#333;
+cursor:pointer;
 &.left{
 float:left;
 }
@@ -99,6 +98,7 @@ border-radius:19px;
 border:1px solid #ec6149;
 padding:0 20px;
 font-size:14px;
+cursor:pointer;
 &.reg{
 color;#ec6149;
 }
@@ -111,7 +111,7 @@ color:#fff;
 export const SearchWrapper = styled.div`
 float:left;
 position:relative;
-.iconfont {
+.zoom {
 position:absolute;
 right:5px;
 bottom:5px;
@@ -124,4 +124,54 @@ background:#777;
 color:white;
 }
 }
+`;
+
+export const SearchInfo = styled.div`
+position:absolute;
+left:0;
+width:240px;
+padding:0 20px;
+top:56px;
+box-shadow:0 0 8px rgba(0,0,0,.2);
+background:white;
+`;
+
+export const SearchInfoTitle = styled.div`
+margin-top:15px;
+margin_bottom:15px;
+line-height:20px;
+font-size:15px;
+color:#969696;
+`;
+
+export const SearchInfoSwitch = styled.span`
+float:right;
+font-size:13px;
+cursor:pointer;
+.spin{
+display:block;
+float:left;
+font-size:12px;
+margin-right:2px;
+transition:all .2s ease-in;
+transform-origin:center center;
+}
+`;
+
+export const SearchInfoItem = styled.a`
+font-size:12px;
+padding:0 5px;
+line-height:20px;
+border:1px solid #ddd;
+color:#969696;
+border-radius:3px;
+display:block;
+float:left;
+margin-right:10px;
+margin-bottom:15px;
+color:#333;
+`;
+
+export const SearchInfoList = styled.div`
+overflow.hidden;
 `;
